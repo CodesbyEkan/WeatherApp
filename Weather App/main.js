@@ -1,61 +1,75 @@
-/*
-const url = "https://weatherapi-com.p.rapidapi.com/current.json?q=53.1%2C-0.13";
-const options = {
-  method: "GET",
-  headers: {
-    "x-rapidapi-key": "fe10366156msh24240adc9983122p1bae73jsn2a322a08b88e",
-    "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+weatherObj = {
+  "coord": {
+     "lon": 7.367,
+     "lat": 45.133
   },
-};
+  "weather": [
+     {
+        "id": 501,
+        "main": "Rain",
+        "description": "moderate rain",
+        "icon": "10d"
+     }
+  ],
+  "base": "stations",
+  "main": {
+     "temp": 284.2,
+     "feels_like": 282.93,
+     "temp_min": 283.06,
+     "temp_max": 286.82,
+     "pressure": 1021,
+     "humidity": 60,
+     "sea_level": 1021,
+     "grnd_level": 910
+  },
+  "visibility": 10000,
+  "wind": {
+     "speed": 4.09,
+     "deg": 121,
+     "gust": 3.47
+  },
+  "rain": {
+     "1h": 2.73
+  },
+  "clouds": {
+     "all": 83
+  },
+  "dt": 1726660758,
+  "sys": {
+     "type": 1,
+     "id": 6736,
+     "country": "IT",
+     "sunrise": 1726636384,
+     "sunset": 1726680975
+  },
+  "timezone": 7200,
+  "id": 3165523,
+  "name": "Province of Turin",
+  "cod": 200
+};                 
 
-const text = document.getElementById("data");
-const images = document.getElementsByTagName("img");
+const country = document.getElementById("locate");
+const temp = document.getElementById("temp");
+const desc = document.getElementById("desc");
 
+//API Key = 61fc468553e472e79f9a01ef6d340ac7
+const urll = "https://api.openweathermap.org/data/2.5/weather?q=London&appid=61fc468553e472e79f9a01ef6d340ac7"
+const url = "http://api.openweathermap.org/geo/1.0/direct?q=Nigeria&limit=5&appid=61fc468553e472e79f9a01ef6d340ac7"
 
-/*
-async function weatherApp() {
+async  function geol(){
   try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    //text.innerHTML = result.location.country;
-    icon = result.current.condition.icon;
-    images.src = icon.toString();
-    console.log(result.current.condition.icon);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-weatherApp();
-*/
-
-async function myWeather() {
-  try {
-    const myHeaders = new Headers();
-    myHeaders.append(
-      "X-RapidAPI-Host",
-      "community-open-weather-map.p.rapidapi.com"
-    );
-    myHeaders.append(
-      "X-RapidAPI-Key",
-      "47be25f2b2msh412286e8ef08c7dp1ab9e4jsn7d71e8d4981f"
-    );
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    const myResponse = await fetch(
-      "https://community-open-weather-map.p.rapidapi.com/weather?q=Lagos,Nigeria",
-      requestOptions
-    );
-    const myResult = myResponse.text();
-    console.log(myResult);
-  } catch (error) {
+    //const weatherlo = await fetch(urll);
+    //const geolo = await fetch(url);
+    //const repl = await geolo.json();
+    desc.innerHTML = weatherObj.weather[0].description;
+    country.innerHTML = weatherObj.name + ", " + weatherObj.sys.country + "ALY";
+    tempNum = weatherObj.main.temp
+    temp.innerHTML = Math.trunc(tempNum / 10) + "&deg;c";
+    //console.log(repl[0].name);
+    //console.log(weatherlo);
+  } catch(error){
     console.log(error);
   }
 }
 
-myWeather();
+geol();
